@@ -47,30 +47,17 @@
     <div class="error-bar" id="errorBar">Operation Failed</div>
 
     <script type="text/javascript">
-        function showSuccessBar(customMessage) {
-            const successBar = document.getElementById('success-bar');
-            successBar.innerHTML = customMessage; // Set the custom message
-            successBar.style.display = 'block';   // Show the success bar
-
-            // Hide the success bar after 3 seconds
-            setTimeout(function() {
-                successBar.style.display = 'none';
-            }, 3000);
-        }
-        
         function nativeResponse(jsonString) {
             try {
-                // Parse the JSON string back into an object
                 let responseObj = JSON.parse(jsonString);
-                // Handle the response as needed
-                if (responseObj.action === "fetch") {
-                    // Handle fetch response
-                    console.log("Fetch Data:", responseObj.data);
-                    showSuccessBar(jsonString)
-                }
-                console.log("Received response from native:", responseObj);
+                console.log("Data received from Swift:", responseObj); // Log the received data
+
+                // Show the received data in an alert
+                alert("Received data:\n" + JSON.stringify(responseObj, null, 2));
+
+                // Handle the response as needed (e.g., update the UI)
             } catch (e) {
-                console.error("Failed to parse response JSON:", e);
+                console.error("Error parsing JSON from Swift:", e);
             }
         }
         
@@ -101,7 +88,7 @@
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "insert",
                 "entityName": "Company",
-                "data": {"name": "Greeeno", "id": 5}
+                "data": {"name": "Greeeno", "id": 5 }
             });
         }
 
