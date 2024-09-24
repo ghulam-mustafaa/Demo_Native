@@ -31,8 +31,9 @@
 <body>
     <h1>WebView Native Communication</h1>
 
-    <button onclick="fetchData()">Fetch Data</button>
-    <button onclick="insertData()">Insert Data</button>
+    <button onclick="fetchData()">Fetch Company Data</button>
+    <button onclick="fetchEmployeeData()">Fetch Employee Data</button>
+    <button onclick="insertData()">Insert Company Data</button>
     <button onclick="updateData()">Update Data</button>
     <button onclick="deleteItem()">Delete Item</button>
     <button onclick="showSuccessBar()">Show Success Bar</button>
@@ -45,10 +46,28 @@
     <div class="error-bar" id="errorBar">Operation Failed</div>
 
     <script type="text/javascript">
+        function nativeResponse(jsonString) {
+            try {
+                // Parse the JSON string back into an object
+                let responseObj = JSON.parse(jsonString);
+                console.log("Received response from native:", responseObj);
+            } catch (e) {
+                console.error("Failed to parse response JSON:", e);
+            }
+        }
+        
         function fetchData() {
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "fetch",
                 "entityName": "Company"
+            });
+        }
+
+        function fetchEmployeeData() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "fetch",
+                "entityName": "CompanyEmployee",
+                "predicate": "companyId == 2"
             });
         }
 
