@@ -66,7 +66,7 @@
                 if (responseObj.action === "fetch") {
                     // Handle fetch response
                     console.log("Fetch Data:", responseObj.data);
-                    showSuccessBar("Fetch Data:", responseObj.data)
+                    showSuccessBar(jsonString)
                 }
                 console.log("Received response from native:", responseObj);
             } catch (e) {
