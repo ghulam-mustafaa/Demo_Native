@@ -62,6 +62,7 @@
         }
         
         function fetchData() {
+            alert("Fetching data");
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "fetch",
                 "entityName": "Company"
