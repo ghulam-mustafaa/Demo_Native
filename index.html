@@ -49,11 +49,13 @@
     <script type="text/javascript">
         function nativeResponse(jsonString) {
             try {
-                let responseObj = JSON.parse(jsonString);
-                console.log("Data received from Swift:", responseObj); // Log the received data
+                let success = jsonString.success;
+                let action = jsonString.action;
+                let data = jsonString.data;
+                console.log("Data received from Swift:", data); // Log the received data
 
                 // Show the received data in an alert
-                alert("Received data: " + responseObj);
+                alert("Received data: " + action);
 
                 // Handle the response as needed (e.g., update the UI)
             } catch (e) {
