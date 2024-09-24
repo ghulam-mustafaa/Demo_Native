@@ -63,7 +63,7 @@
             });
         }
 
-        function fetchEmployeeData() {
+        function fetchJoblogicEmployeeData() {
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "fetch",
                 "entityName": "CompanyEmployee",
@@ -71,11 +71,19 @@
             });
         }
 
+        function fetchFoodPandaEmployeeData() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "fetch",
+                "entityName": "CompanyEmployee",
+                "predicate": "companyId == 3"
+            });
+        }
+
         function insertData() {
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "insert",
                 "entityName": "Company",
-                "data": {"name": "Greeeno"}
+                "data": {"name": "Greeeno", "id": "5"}
             });
         }
 
@@ -83,8 +91,8 @@
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "update",
                 "entityName": "Company",
-                "predicate": "name == 'Abc Inc.'",
-                "data": {"name": "Twitter"}
+                "predicate": "name == 'Joblogic'",
+                "data": {"name": "UK"}
             });
         }
 
@@ -92,7 +100,7 @@
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "delete",
                 "entityName": "Company",
-                "predicate": "id == 2"
+                "predicate": "id == 4"
             });
         }
 
