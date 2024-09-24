@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native Bridge Communication</title>
+    <style>
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .success-bar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            display: none;
+            margin: 10px 0;
+        }
+        .error-bar {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            display: none;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebView Native Communication</h1>
+
+    <button onclick="fetchData()">Fetch Data</button>
+    <button onclick="insertData()">Insert Data</button>
+    <button onclick="updateData()">Update Data</button>
+    <button onclick="deleteItem()">Delete Item</button>
+    <button onclick="showSuccessBar()">Show Success Bar</button>
+    <button onclick="showErrorBar()">Show Error Bar</button>
+    <button onclick="showAlert()">Show Alert</button>
+    <button onclick="openCamera()">Open Camera</button>
+    <button onclick="openGallery()">Open Gallery</button>
+
+    <div class="success-bar" id="successBar">Operation Successful</div>
+    <div class="error-bar" id="errorBar">Operation Failed</div>
+
+    <script type="text/javascript">
+        function fetchData() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "fetch",
+                "entityName": "Company"
+            });
+        }
+
+        function insertData() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "insert",
+                "entityName": "Company",
+                "data": {"name": "Greeeno"}
+            });
+        }
+
+        function updateData() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "update",
+                "entityName": "Company",
+                "predicate": "name == 'Abc Inc.'",
+                "data": {"name": "Twitter"}
+            });
+        }
+
+        function deleteItem() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "delete",
+                "entityName": "Company",
+                "predicate": "id == 2"
+            });
+        }
+
+        function showSuccessBar() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "showBar",
+                "isSuccess": "true",
+                "message": "Successfully shown bar"
+            });
+        }
+
+        function showErrorBar() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "showBar",
+                "isSuccess": "false",
+                "message": "Error showing bar"
+            });
+        }
+
+        function showAlert() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "showAlert",
+                "title": "Alert Title",
+                "message": "This is alert message"
+            });
+        }
+
+        function openCamera() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "openCamera"
+            });
+        }
+
+        function openGallery() {
+            window.webkit.messageHandlers.nativeBridge.postMessage({
+                "action": "openGallery"
+            });
+        }
+    </script>
+</body>
+</html>
