@@ -31,7 +31,7 @@
 <body>
     <h1>WebView Native Communication</h1>
 
-    <button onclick="fetchData()">Fetch Company Data</button>
+    <button onclick="goBack()">Go Back</button>
     <button onclick="fetchJoblogicEmployeeData()">Fetch Joblogic Employee Data</button>
     <button onclick="fetchFoodPandaEmployeeData()">Fetch Foodpanda Employee Data</button>
     <button onclick="insertData()">Insert Company Data</button>
@@ -64,12 +64,9 @@
             }
         }
         
-        function fetchData() {
+        function goBack() {
             alert("Fetching data");
-            window.webkit.messageHandlers.nativeBridge.postMessage({
-                "action": "fetch",
-                "entityName": "Company"
-            });
+            window.webkit.messageHandlers.goBack.postMessage();
         }
 
         function fetchJoblogicEmployeeData() {
