@@ -65,8 +65,13 @@
         }
         
         function goBack() {
-            alert("Fetching data");
-            window.webkit.messageHandlers.goBack.postMessage({});
+            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+                window.webkit.messageHandlers.nativeBridge.postMessage({
+                    "action": "goBack",
+                });
+            } else if (typeof Android !== "undefined" && Android.saveImageData) {
+                Android.goBack();
+            }
         }
 
         function fetchJoblogicEmployeeData() {
